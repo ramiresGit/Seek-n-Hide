@@ -12,48 +12,34 @@ public class MainHeroScript : MonoBehaviour
     private CharacterController controller;
 
     /// <summary>
-    /// Скорость игрока
+    /// Скорость перемещения игрока
     /// </summary>
-    private Vector3 playerVelocity;
+    public float speed = 6.0f;
 
     /// <summary>
-    /// Признак того, что игрок прижат к земле
+    /// Сила гравитации
     /// </summary>
-    private bool groundedPlayer;
-    private float playerSpeed = 2.0f;
-    private float jumpHeight = 1.0f;
-    private float gravityValue = -9.81f; 
-
+    public float gravity = -9.8f;
     #endregion
 
     private void Start()
     {
-        controller = gameObject.AddComponent<CharacterController>();
+        //получаем компонент CharacterController
+        controller = gameObject.GetComponent<CharacterController>();
     }
 
     void Update()
     {
-        groundedPlayer = controller.isGrounded;
-        if (groundedPlayer && playerVelocity.y < 0)
-        {
-            playerVelocity.y = 0f;
-        }
+        //Горизонтальная (A-D) и вертикальная (W-S) ось 
+        float deltaX = Input.GetAxis("Horizontal") * speed;
+        float deltaZ = Input.GetAxis("Vertical") * speed;
 
-        Vector3 move = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
-        controller.Move(move * Time.deltaTime * playerSpeed);
+        Vector3 movement = new Vector3(deltaX, 0, deltaZ);
+        movement = Vector3.ClampMagnitude(movement, speed);
+        movement.y = gravity;
+        movement *= Time.deltaTime;
+        movement = transform.TransformDirection(movement);
+        controller.Move(movement);
 
-        if (move != Vector3.zero)
-        {
-            gameObject.transform.forward = move;
-        }
-
-        // Выполнить прыжок
-        if (Input.GetButtonDown("Jump") && groundedPlayer)
-        {
-            playerVelocity.y += Mathf.Sqrt(jumpHeight * -3.0f * gravityValue);
-        }
-
-        playerVelocity.y += gravityValue * Time.deltaTime;
-        controller.Move(playerVelocity * Time.deltaTime);
     }
 }
