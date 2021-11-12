@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class HunterControllerScript : MonoBehaviour
@@ -10,31 +11,25 @@ public class HunterControllerScript : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+
     }
 
     // Update is called once per frame
     void Update()
     {
-        
         Object[] allObjects = FindObjectsOfType(typeof(GameObject));
-        foreach (Object obj in allObjects)
-        {   
-            
-            if (obj.name == "Hunter")
-            {
-                i++;
-               
-            }
-                
-        }
-        if (i < 10)
+        if (allObjects.Count(obj => obj.name == "Hunter") < 10 && i < 10)
         {
             _hunter = Instantiate(hunterPrefab);
-            _hunter.transform.position = new Vector3(0, 1, 0);
+            _hunter.transform.position = new Vector3(GetRandomFloat(-110,170), 1, GetRandomFloat(-20, 170));
             float angle = Random.Range(0, 360);
             _hunter.transform.Rotate(0, angle, 0);
+            i++;
         }
+    }
 
+    private float GetRandomFloat(float start = 0, float end = 200)
+    {
+        return Random.Range(start, end);
     }
 }
