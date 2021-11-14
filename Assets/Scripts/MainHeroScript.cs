@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class MainHeroScript : MonoBehaviour
@@ -20,6 +21,10 @@ public class MainHeroScript : MonoBehaviour
     /// Сила гравитации
     /// </summary>
     public float gravity = -9.8f;
+
+    public float visibleRadius = 20f;
+
+    private const string HunterObjName = "OblivionDrone";
     #endregion
 
     private void Start()
@@ -41,5 +46,37 @@ public class MainHeroScript : MonoBehaviour
         movement = transform.TransformDirection(movement);
         controller.Move(movement);
 
+
+        float visionRange = 10;
+
+        Collider[] nearby = Physics.OverlapSphere(transform.position, visionRange).Where(collider => collider.name.Contains("testObj")).ToArray();
+        List<float> distances = new List<float>();
+
+        if(nearby.Length > 0)
+        {
+            for (var i = 0; i < nearby.Length; i++)
+            {
+                float dist = Vector3.Distance(transform.position, nearby[i].transform.position);
+                distances.Add(dist);
+            };
+        }    
+
+        if (distances.Count > 0)
+        {
+            GameObject.Find("FearStatus").SendMessage("ChangeFearValue", distances.Min()); 
+        }
+        
+            
+
+        /* Ray ray = new Ray(transform.position, transform.forward);
+         RaycastHit hit;
+         if (Physics.SphereCast(transform.position, 0.95f, transform.forward, out hit))
+         {
+             Debug.Log(hit.collider.name);
+             if (hit.distance < visibleRadius && (hit.collider.name.Contains(HunterObjName) || hit.collider.name.Contains("testObj")))
+             {
+                 GameObject.Find("FearStatus").SendMessage("ChangeFearValue", hit.distance);
+             }
+         }*/
     }
 }

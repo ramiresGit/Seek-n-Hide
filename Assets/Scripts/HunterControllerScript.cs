@@ -18,7 +18,7 @@ public class HunterControllerScript : MonoBehaviour
     void Update()
     {
         Object[] allObjects = FindObjectsOfType(typeof(GameObject));
-        if (allObjects.Count(obj => obj.name == "OblivionDrone") < 10 && i < 10)
+        if (allObjects.Count(obj => obj.name == "OblivionDrone") < 50 && i < 50)
         {
             _hunter = Instantiate(hunterPrefab);
             _hunter.transform.position = new Vector3(GetRandomFloat(-110,170), 1, GetRandomFloat(-20, 170));
