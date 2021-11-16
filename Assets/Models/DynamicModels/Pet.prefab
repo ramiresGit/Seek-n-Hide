@@ -473,8 +473,8 @@ GameObject:
   - component: {fileID: 1949831662811030427}
   - component: {fileID: -8146131239939399349}
   - component: {fileID: -4997816263661710591}
-  - component: {fileID: -6042354832933767363}
-  - component: {fileID: -932594939526856930}
+  - component: {fileID: -1938303347011067607}
+  - component: {fileID: -2826303689578627187}
   m_Layer: 0
   m_Name: Pet
   m_TagString: Untagged
@@ -529,7 +529,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 71a23c7713341de488c6dd584472d485, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!54 &-6042354832933767363
+--- !u!54 &-1938303347011067607
 Rigidbody:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -543,9 +543,9 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 0
+  m_Constraints: 112
   m_CollisionDetection: 0
---- !u!135 &-932594939526856930
+--- !u!135 &-2826303689578627187
 SphereCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -556,8 +556,8 @@ SphereCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 1.23
-  m_Center: {x: 0, y: 0.96, z: 0}
+  m_Radius: 1.06
+  m_Center: {x: 0, y: 1.08, z: 0}
 --- !u!1 &1187157212019504179
 GameObject:
   m_ObjectHideFlags: 0
