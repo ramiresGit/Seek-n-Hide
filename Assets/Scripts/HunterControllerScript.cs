@@ -22,7 +22,7 @@ public class HunterControllerScript : MonoBehaviour
         if (allObjects.Count(obj => obj.name.Contains(Global.HunterObjName)) < 50 && i < 50)
         {
             _hunter = Instantiate(hunterPrefab);
-            _hunter.transform.position = new Vector3(GetRandomFloat(-110,170), 1, GetRandomFloat(-20, 170));
+            _hunter.transform.position = new Vector3(GetRandomFloat(-110,170), 5, GetRandomFloat(-20, 170));
             float angle = Random.Range(0, 360);
             _hunter.transform.Rotate(0, angle, 0);
             i++;

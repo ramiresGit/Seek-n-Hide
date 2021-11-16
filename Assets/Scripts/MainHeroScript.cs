@@ -2,6 +2,7 @@ using Assets.Scripts;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using UnityEngine;
 
 public class MainHeroScript : MonoBehaviour
@@ -14,6 +15,12 @@ public class MainHeroScript : MonoBehaviour
     private CharacterController controller;
 
     /// <summary>
+    /// Префаб питомца
+    /// </summary>
+    [SerializeField]
+    private GameObject petPrefab;
+
+    /// <summary>
     /// Скорость перемещения игрока
     /// </summary>
     public float speed = 6.0f;
@@ -23,8 +30,15 @@ public class MainHeroScript : MonoBehaviour
     /// </summary>
     public float gravity = -9.8f;
 
-    public float visibleRadius = 20f;
+    /// <summary>
+    /// Флаг того, что питомец выпущен
+    /// </summary>
+    private bool isPetInUse = false;
 
+    /// <summary>
+    /// Аниматор питомца
+    /// </summary>
+    private Animator petAnimator;
 
     #endregion
 
@@ -32,6 +46,7 @@ public class MainHeroScript : MonoBehaviour
     {
         //получаем компонент CharacterController
         controller = gameObject.GetComponent<CharacterController>();
+        petAnimator = petPrefab.GetComponent<Animator>();
     }
 
     void Update()
@@ -62,6 +77,21 @@ public class MainHeroScript : MonoBehaviour
             };
         }    
         GameObject.Find("FearStatus").SendMessage("ChangeFearValue", distances.MinOrDefault()); 
+
+        if (Input.GetKeyDown(KeyCode.E) && !isPetInUse)
+        {
+            StartCoroutine(DropPet());
+            //petPrefab.GetComponent<PetScript>().beginDropAnim?.Invoke(transform.position);
+        }
+
+    }
+
+   private IEnumerator DropPet()
+    {
+        GameObject pet = GameObject.Instantiate(petPrefab, transform.position, transform.rotation );
+        pet.GetComponent<PetScript>().BeginDropAnim(transform.position);
+
+        yield return new WaitForSeconds(4);
     }
 
 }
