@@ -1,3 +1,4 @@
+using Assets.Scripts;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -18,7 +19,7 @@ public class HunterControllerScript : MonoBehaviour
     void Update()
     {
         Object[] allObjects = FindObjectsOfType(typeof(GameObject));
-        if (allObjects.Count(obj => obj.name == "OblivionDrone") < 50 && i < 50)
+        if (allObjects.Count(obj => obj.name.Contains(Global.HunterObjName)) < 50 && i < 50)
         {
             _hunter = Instantiate(hunterPrefab);
             _hunter.transform.position = new Vector3(GetRandomFloat(-110,170), 1, GetRandomFloat(-20, 170));
