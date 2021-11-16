@@ -29,7 +29,6 @@ public class HeroUI : MonoBehaviour
         {
             FearStatus = image.GetComponent<Image>();
             float val = Math.Abs(1 - ((float)value / 10) + 0.2f);
-            Debug.Log(val);
             if(value != 0)
                 FearStatus.fillAmount = val;
             else 

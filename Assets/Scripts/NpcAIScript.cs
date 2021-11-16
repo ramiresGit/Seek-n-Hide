@@ -6,7 +6,7 @@ using UnityEngine;
 public class NpcAIScript : MonoBehaviour
 {
     public float speed = 3.0f;
-    public float obstacleRange = 10.0f;
+    public float obstacleRange = 0.5f;
     // Start is called before the first frame update
     void Start()
     {
@@ -16,10 +16,10 @@ public class NpcAIScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        transform.Translate(0, speed * Time.deltaTime, 0 );
+        transform.Translate(0, 0, speed * Time.deltaTime);
         Ray ray = new Ray(transform.position, transform.forward);
         RaycastHit hit;
-        if (Physics.SphereCast(ray, 1.75f, out hit))
+        if (Physics.SphereCast(ray, 0.75f, out hit))
         {
             if (hit.collider.name.Contains(Global.MainHeroName) && hit.distance < 10)
             {
@@ -27,6 +27,9 @@ public class NpcAIScript : MonoBehaviour
             }
             if (hit.distance < obstacleRange)
             {
+                if(hit.collider.name == Global.MainHeroName)
+                    Debug.Log($"Barycentric coordinate: {hit.barycentricCoordinate}");  
+                
                 float angle = Random.Range(-110, 110);
                 transform.Rotate(0, angle, 0);
             }

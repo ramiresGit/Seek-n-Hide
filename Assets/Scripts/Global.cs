@@ -11,7 +11,7 @@ namespace Assets.Scripts
         /// <summary>
         /// Название объекта летающего дрона охотника
         /// </summary>
-        public const string HunterObjName = "Robot_Rockie";
+        public const string HunterObjName = "HunterController";
 
         public const string MainHeroName = "MainHero";
     }
