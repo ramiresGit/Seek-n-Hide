@@ -529,6 +529,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 71a23c7713341de488c6dd584472d485, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  attackingSphereAnim: {fileID: 7400000, guid: 619fdd9b6bb1eee47b3355504d8bdf76, type: 2}
+  attackingSphereMaterial: {fileID: 2100000, guid: db87f77debdcc7a4592d4d5ee7a42780, type: 2}
+  attackingSphereModel: {fileID: 6648406108543713260, guid: 168a12c8a0e5474499fe4e43c7e6431a, type: 3}
 --- !u!54 &-1938303347011067607
 Rigidbody:
   m_ObjectHideFlags: 0

@@ -88,13 +88,11 @@ public class MainHeroScript : MonoBehaviour
 
    private IEnumerator DropPet()
     {
-        GameObject pet = GameObject.Instantiate(petPrefab, transform.position, transform.rotation );
+        GameObject pet = Instantiate(petPrefab, transform.position, transform.rotation );
+        
         pet.GetComponent<PetScript>().BeginDropAnim(transform.position);
-        for (int i = 0; i < 5; i++)
-        {
-            pet.transform.Translate(0, 0, 10f * Time.deltaTime);
-            yield return new WaitForSeconds(0.01f);
-        }
+        yield return new WaitForSeconds(3f);
+
        
 
     }
